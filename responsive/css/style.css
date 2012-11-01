@@ -1,0 +1,59 @@
+#header {
+	background: #000;
+}
+
+#nav {
+	overflow: auto;
+	border: 1px solid #aaa;
+}
+
+#nav li {
+	display: block;
+	float: left;
+	padding: 5px 10px;
+	border: 1px solid #888;
+}
+
+#nav li.navButton {
+	float: right;
+	cursor: pointer;
+	color: #fff;
+}
+
+/* Non-desktop */
+@media (max-width: 979px) {
+	#nav li {
+		float: none;
+	}
+	
+	#nav .navItem {
+		display: none;
+	}
+}
+
+/* Desktop */
+@media (min-width: 980px) {
+	#nav li {
+		float: left;
+	}
+	
+	#nav .navItem {
+		display: block !important;
+	}
+}
+
+/* Large desktop */
+@media (min-width: 1200px) {
+}
+ 
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 768px) and (max-width: 979px) {
+}
+ 
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) {
+}
+ 
+/* Landscape phones and down */
+@media (max-width: 480px) {
+}
