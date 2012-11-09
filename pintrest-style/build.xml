@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<project basedir="." default="buildit">
+    <property name="src.js.dir"      value="js" />
+    <property name="compiler.path"   value="../build/compiler.jar" />
+    <property name="out.js.filename" value="file.js" />
+    <property name="temp.dir"        value="./temp" />
+    <property name="out.dir"         value="./out" />
+    <property name="out.js.dir"      value="./out/js" />
+    
+	<taskdef name="jscomp" classname="com.google.javascript.jscomp.ant.CompileTask" classpath="${compiler.path}"/>
+
+	<target name="setup">
+	    <mkdir dir="${out.dir}" />
+	    <mkdir dir="${out.js.dir}" />
+	    <mkdir dir="${temp.dir}" />
+    </target>
+    
+	<target name="concat.js">
+	    <echo>Combining files into ${temp.dir}/${out.js.filename}</echo>
+	    <concat destfile="${temp.dir}/${out.js.filename}">
+	        <fileset dir="${src.js.dir}" includes="some-filler-script.js" />
+	        <fileset dir="${src.js.dir}" includes="pinterest-style.js" />
+	        <!-- 
+	        <fileset dir="${build.js.dir}" includes="some-filler-script.js" />
+	        <fileset dir="${build.js.dir}" includes="pinterest-style.js" />
+	        -->
+	    </concat>
+	    <echo>Combined source files</echo>
+    </target>
+
+	<target name="compile" depends="setup, concat.js">
+	    <echo>Compiling Javascript using Google's Closure Compiler</echo>
+	    <jscomp compilationLevel="simple" warning="verbose" debug="false" output="${out.js.dir}/${out.js.filename}">
+			<sources dir="${temp.dir}">
+	        	<file name="${out.js.filename}"/>
+	      	</sources>
+	    </jscomp>
+	</target>
+
+	<target name="clean">
+		<echo>Cleaning project</echo>
+		<delete dir="${temp.dir}" />
+		<delete dir="${out.dir}" />
+	</target>
+	
+	<target name="cleanup">
+		<delete dir="${temp.dir}" />
+	</target>
+	
+	<target name="buildit" depends="compile, cleanup">
+	    <echo>All done =)</echo>
+	</target>
+</project>

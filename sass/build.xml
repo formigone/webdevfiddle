@@ -17,7 +17,7 @@
       <globmapper from="*.scss" to="*.css" />
     </firstmatchmapper>
   </apply>
-  <eclipse.refreshLocal resource="xa/public" depth="infinite"/>
+  <eclipse.refreshLocal resource="/var/www/rnd/sass" depth="infinite"/>
 </target>
 
 <!-- Compile .scss files in the public/sass directory using Compass -->
@@ -25,6 +25,11 @@
     <exec executable="compass" dir="${basedir}/scss">
       <arg value="compile" />
     </exec>
-    <eclipse.refreshLocal resource="xa/public" depth="infinite"/>
+    <eclipse.refreshLocal resource="/var/www/rnd/sass" depth="infinite"/>
   </target>
+  
+	<target name="clean">
+		<echo>Cleaning project</echo>
+		<delete dir="${css.dir}" />
+	</target>
 </project>
